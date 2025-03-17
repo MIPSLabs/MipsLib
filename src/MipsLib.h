@@ -5,7 +5,7 @@
 #ifndef MIPSLIB_H
 #define MIPSLIB_H
 
-#include "Arduino.h"
+#include <Arduino.h>
 
 struct MipsModule {
     uint32_t address;
@@ -55,11 +55,9 @@ class MipsLab {
         int Start(); // Must be used in setup
         int Loop(); // Must be used in loop
 
-        //TODO change address name to ID, its easier to understand
         //Module specific functions
-        int ElbowUp(uint32_t address, uint8_t intensity = 5);
-        int ElbowDown(uint32_t address, uint8_t intensity = 5);
-        int ElbowTo(uint32_t address, uint8_t angle);
+        int ArmTo(uint32_t address, uint8_t angle);
+        int ClawTo(uint32_t address, uint8_t angle)
 
     private:
         //Containers

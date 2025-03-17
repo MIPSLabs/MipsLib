@@ -9,7 +9,7 @@
 #include "MipsLib.h"
 
 //*  Private Containers
-const char *MipsLab::moduleTypes[] = {"","LED","Claw","Elbow"};
+const char *MipsLab::moduleTypes[] = {"","LED","Claw","Arm"};
 
 //*  Private Essential
 //sends ACT packet from Hub
@@ -145,27 +145,18 @@ int MipsLab::Start() {
 
 //*  Public Module Functions with Controller versions
 //TODO These assume the address actually goes to a servo, which should be changed to check
-// Lowers servo duty cycle, on "angle" of 230 to 239; higher angle increases distance
-int MipsLab::ElbowUp(uint32_t address, uint8_t intensity) {
-    if(intensity > 9)
-        return 2;
-    const uint32_t msg = 230+intensity;
-    sendACT(address, msg, 1);
-    return 0;
-}
-// Increases Elbow duty cycle, on "angle" of 240 to 249; higher angle increases distance
-int MipsLab::ElbowDown(uint32_t address, uint8_t intensity) {
-    if(intensity > 9)
-        return 2;
-    const uint32_t msg = 240+intensity;
-    sendACT(address, msg, 1);
-    return 0;
-}
 // Should go near enough
-int MipsLab::ElbowTo(uint32_t address, uint8_t angle) {
+int MipsLab::ArmTo(uint32_t address, uint8_t angle) {
     if(angle > 180)
         return 1;
     const uint32_t msg = angle;
+    sendACT(address, msg, 1);
+    return 0;
+}
+int MipsLab::ClawTo(uint32_t address, uint8_t angle) {
+    if(angle > 90)
+        return 1;
+    const uint32_t msg = angle + 90;
     sendACT(address, msg, 1);
     return 0;
 }
