@@ -1,0 +1,3 @@
+MipsLab	KEYWORD1
+Start	KEYWORD2
+ElbowTo	KEYWORD2
