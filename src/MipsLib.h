@@ -57,7 +57,7 @@ class MipsLab {
 
         //Module specific functions
         int ArmTo(uint32_t address, uint8_t angle);
-        int ClawTo(uint32_t address, uint8_t angle)
+        int ClawTo(uint32_t address, uint8_t angle);
 
     private:
         //Containers
