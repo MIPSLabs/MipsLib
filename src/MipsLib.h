@@ -24,6 +24,7 @@ public:
         capacity = 4;
     }
     ~MipsVector() { delete[] array; }
+
     void push_back(MipsModule newMod) {
         if (length >= capacity) {
             MipsModule *newArray = new MipsModule[capacity + 4];

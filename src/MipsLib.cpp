@@ -37,8 +37,13 @@ int MipsLab::sendHUB() {
 int MipsLab::updateModules() {
     uint32_t isDoneTimer = 0;
     sendHUB(); // send hub to see what modules are connected
-    while(isDoneTimer < 100000) { //this one gets all the messages hopefully (imprecise)
-        
+
+    for(int i=0;i<30;i++) {
+        Serial.println();
+    }
+    Serial.print("Modules connected... ");
+
+    while(isDoneTimer < 1000000) { //this one gets all the messages hopefully (imprecise)
         if(Serial1.available() > 0) {
             write(Serial1.read());
             isDoneTimer = 0;
@@ -46,12 +51,7 @@ int MipsLab::updateModules() {
         checkBuffer();
         isDoneTimer++;
     }
-    
-    for(int i=0;i<30;i++) {
-        Serial.println();
-    }
     isDoneTimer = 1;
-    Serial.print("Modules connected... ");
     Serial.println(modules.size());
     for (int i = 0; i < modules.size(); i++) {
         Serial.print(isDoneTimer++);
@@ -134,6 +134,8 @@ MipsLab::MipsLab() {
 int MipsLab::Start() {
     Serial1.begin(BaudRate, SERIAL_8N2); // Hub Input / Output (packets)
     Serial.begin(BaudRate); // UI
+
+    delay(500);
 
     while (!Serial) {} // Wait for the serial to start before continuing
 
